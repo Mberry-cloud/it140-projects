@@ -1,21 +1,31 @@
-# Project One Get-Item Pseudocode
-#
+# Project One Get-Item Pseudocode - Mariah Berry
 # Graded checkpoint: Module Five Project One
-# Later use: get-item and inventory design for M7 Project Two
-#
-# Review the course-provided get-item flowchart before completing this file.
-# Write pseudocode, not Python code. Use clear indentation and course-appropriate
-# keywords such as INPUT, OUTPUT, IF, ELSE, SET, ADD, or similar terms.
 
-START get_item
+START get_item(current_room, rooms, inventory)
+    # Information needed: player's current_room, room dictionary, and player's inventory
+    # Prompt for and receive the player's get-item command
+    OUTPUT "Enter 'get [item name]' to pick up an item:"
+    INPUT command
 
-    # TODO 1: Identify the information the get-item process needs.
-    # Consider the current room, item in that room, and player's inventory.
+    #Validate whether the requested item is available in the current room
+    IF item is already in inventory THEN
+        OUTPUT "You already have that item in your inventory!"
+    ELSE
+        IF item is in rooms[current_room] THEN
+            # Update inventory, remove item from room, and output confirmation
+            ADD item to inventory
+            REMOVE item from rooms[current_room]
+            OUTPUT item + "has been added to your inventory."
+        ELSE
+            # Output an invalid item message when the item is not in the room
+            OUTPUT "There is no such item in this room!"
+        END IF
+    END IF
 
-    # TODO 2: Prompt for and receive the player's get-item command.
-
-    # TODO 3: Validate whether the requested item is available in the current
-    # room. Show the decision clearly.
+    # Display updated inventory and return to the main gameplay loop
+    OUTPUT "Current Inventory: " + inventory
+    RETURN inventory
+END get_item
 
     # TODO 4: Describe what happens when the item request is valid.
     # Include the inventory update and player output.
